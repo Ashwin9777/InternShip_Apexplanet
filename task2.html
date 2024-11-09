@@ -1,0 +1,229 @@
+<!DOCTYPE >
+<html >
+<head>
+    <title>Contact Form, To-Do List, and Responsive Layout</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+      
+        .form-container {
+            width: 100%;
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+            border-radius: 8px;
+        }
+        .form-container input,
+        .form-container button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .form-container button {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+        .form-container button:hover {
+            background-color: #45a049;
+        }
+        .error {
+            color: red;
+            font-size: 0.9em;
+        }
+
+        
+        .todo-container {
+            width: 100%;
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+            border-radius: 8px;
+        }
+        .todo-container input, .todo-container button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        .todo-container button {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .todo-container button:hover {
+            background-color: #45a049;
+        }
+        .task-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .task-list li {
+            background-color: #fff;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .delete-btn {
+            background-color: red;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+        }
+        .nav {
+            display: flex;
+            justify-content: space-around;
+        }
+        .nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+        }
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+            padding: 20px;
+        }
+        .sidebar {
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        .content {
+            background-color: #fff;
+            padding: 20px;
+        }
+
+
+        @media (max-width: 768px) {
+            .nav {
+                flex-direction: column;
+            }
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    
+    <div class="form-container">
+        <h2>Contact Us</h2>
+        <form id="contactForm">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <button type="submit">Submit</button>
+            <p id="errorMessage" class="error"></p>
+        </form>
+    </div>
+
+    <script>
+        const form = document.getElementById('contactForm');
+        const errorMessage = document.getElementById('errorMessage');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const name = form.name.value;
+            const email = form.email.value;
+            let error = "";
+
+            // Validate name field
+            if (!name) {
+                error = "Name is required.";
+            }
+
+            
+            const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+            if (!email || !emailPattern.test(email)) {
+                error = "Please enter a valid email address.";
+            }
+
+            if (error) {
+                errorMessage.textContent = error;
+            } else {
+                errorMessage.textContent = "";
+                // Submit the form or process the data
+                alert("Form submitted successfully!");
+            }
+        });
+    </script>
+
+    
+    <div class="todo-container">
+        <h2>To-Do List</h2>
+        <input type="text" id="taskInput" placeholder="Add a new task">
+        <button id="addTaskBtn">Add Task</button>
+        <ul class="task-list" id="taskList"></ul>
+    </div>
+
+    <script>
+        const addTaskBtn = document.getElementById('addTaskBtn');
+        const taskInput = document.getElementById('taskInput');
+        const taskList = document.getElementById('taskList');
+
+        addTaskBtn.addEventListener('click', function() {
+            const taskText = taskInput.value;
+
+            if (taskText) {
+                const taskItem = document.createElement('li');
+                taskItem.innerHTML = `${taskText} <button class="delete-btn">Delete</button>`;
+                taskList.appendChild(taskItem);
+
+                // Add delete functionality
+                const deleteBtn = taskItem.querySelector('.delete-btn');
+                deleteBtn.addEventListener('click', function() {
+                    taskItem.remove();
+                });
+
+                // Clear the input field
+                taskInput.value = '';
+            } else {
+                alert('Please enter a task.');
+            }
+        });
+    </script>
+
+    <!-- Responsive Layout Section -->
+    <header>
+        <div class="nav">
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="sidebar">
+            <h2>Sidebar</h2>
+            <p>Some sidebar content.</p>
+        </div>
+        <div class="content">
+            <h2>Main Content</h2>
+            <p>Some main content.</p>
+        </div>
+    </div>
+
+</body>
+</html>
