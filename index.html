@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Interactive Quiz and Joke Web Page</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1> Quiz Competition</h1>
+            <p>Test your knowledge with our quiz!</p>
+        </header>
+        
+        <main>
+           
+            <section class="card">
+                <h2>Interactive Quiz</h2>
+                <div id="quiz-container">
+                    <p id="question"></p>
+                    <div id="answers-container">
+                        <button class="btn" onclick="checkAnswer(0)">Answer 1</button>
+                        <button class="btn" onclick="checkAnswer(1)">Answer 2</button>
+                        <button class="btn" onclick="checkAnswer(2)">Answer 3</button>
+                        <button class="btn" onclick="checkAnswer(3)">Answer 4</button>
+                    </div>
+                </div>
+                <p id="result"></p>
+            </section>
+
+            
+            <section class="card">
+                <h2>Joke</h2>
+                <button class="btn" onclick="fetchJoke()">Tell Me a Joke</button>
+                <p id="joke"></p>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
